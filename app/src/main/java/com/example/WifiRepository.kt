@@ -332,14 +332,20 @@ class WifiRepository(
 
     @Suppress("DEPRECATION")
     private fun getCurrentWifiInfo(): WifiInfo? {
-        return try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            try {
                 val active = connectivityManager?.activeNetwork
                 val caps = active?.let { connectivityManager.getNetworkCapabilities(it) }
-                (caps?.transportInfo as? WifiInfo) ?: wifiManager?.connectionInfo
-            } else {
-                wifiManager?.connectionInfo
+                val transportInfo = caps?.transportInfo as? WifiInfo
+                if (transportInfo != null) return transportInfo
+            } catch (e: SecurityException) {
+                Log.w(TAG, "ConnectivityManager access denied, falling back to WifiManager", e)
+            } catch (e: Exception) {
+                Log.w(TAG, "Error querying ConnectivityManager WifiInfo", e)
             }
+        }
+        return try {
+            wifiManager?.connectionInfo
         } catch (e: Exception) {
             Log.e(TAG, "Error getting WifiInfo", e)
             null
