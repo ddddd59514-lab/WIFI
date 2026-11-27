@@ -1,0 +1,6 @@
+{
+  "name": "הגדרות Wi-Fi (Root)",
+  "description": "A root-level replacement for Wi-Fi settings in Android, supporting standard connections and open networks directly using shell.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

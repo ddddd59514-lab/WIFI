@@ -1,0 +1,107 @@
+<resources>
+    <string name="app_name">הגדרות Wi-Fi (Root)</string>
+    <string name="wifi_settings">הגדרות Wi-Fi</string>
+    <string name="root_badge_active">Root פעיל</string>
+    <string name="connecting">מתחבר…</string>
+    <string name="connected">מחובר</string>
+    <string name="saved">שמורה</string>
+    <string name="open_network">פתוחה</string>
+    <string name="secured_network">מאובטחת</string>
+    <string name="enter_password">הזן סיסמה</string>
+    <string name="password">סיסמה</string>
+    <string name="password_hint_wpa">לפחות 8 תווים</string>
+    <string name="password_hint_wep">5 או 13 תווים (WEP)</string>
+    <string name="show_password">הצג סיסמה</string>
+    <string name="hide_password">הסתר סיסמה</string>
+    <string name="connect">התחבר</string>
+    <string name="cancel">ביטול</string>
+    <string name="close">סגור</string>
+    <string name="forget">שכח רשת</string>
+    <string name="forget_confirm_title">לשכוח את הרשת?</string>
+    <string name="forget_confirm_message">המכשיר לא יתחבר אוטומטית לרשת \"%1$s\" בעתיד.</string>
+    <string name="details">פרטים</string>
+    <string name="error_title">שגיאה</string>
+    <string name="error_incorrect_password">סיסמה שגויה או אימות נכשל</string>
+    <string name="error_timeout">ההתחברות נכשלה (פסק זמן)</string>
+    <string name="error_root_command">שגיאת פקודת Root: %1$s</string>
+    <string name="error_unknown">שגיאה לא ידועה</string>
+    <string name="no_root_title">נדרשות הרשאות Root</string>
+    <string name="no_root">אין הרשאות Root למכשיר. יש לאשר גישת Superuser (Magisk / KernelSU) כדי לנהל חיבורי Wi-Fi ברמת מערכת.</string>
+    <string name="retry_root_check">בדוק הרשאות שוב</string>
+    <string name="add_network_manually">הוספת רשת ידנית</string>
+    <string name="ssid">שם הרשת (SSID)</string>
+    <string name="security_type">סוג אבטחה</string>
+    <string name="wpa_wpa2">WPA/WPA2</string>
+    <string name="wpa3">WPA3</string>
+    <string name="open_net">פתוחה</string>
+    <string name="refresh">סריקה מחדש</string>
+    <string name="scanning">סורק רשתות…</string>
+    <string name="no_networks_found">לא נמצאו רשתות Wi-Fi בטווח</string>
+    <string name="no_matching_networks">לא נמצאו רשתות התואמות לסינון</string>
+    <string name="clear_filters">נקה סינון</string>
+    <string name="scan_explanation">ודא שה-Wi-Fi מופעל במכשיר, לחץ לסריקה מחדש או הוסף רשת נסתרת ידנית.</string>
+    <string name="add_network">הוסף רשת</string>
+
+    <!-- Wi-Fi Power Card -->
+    <string name="wifi_power_title">רדיו Wi-Fi</string>
+    <string name="wifi_power_on_subtitle">מופעל • סורק רשתות זמינות</string>
+    <string name="wifi_power_off_subtitle">מכובה • הפעל כדי לחפש רשתות</string>
+    <string name="wifi_disabled_title">ה-Wi-Fi כבוי</string>
+    <string name="wifi_disabled_subtitle">הפעל את ה-Wi-Fi כדי להציג רשתות זמינות ולהתחבר</string>
+    <string name="enable_wifi">הפעל Wi-Fi</string>
+
+    <!-- Search & Filters -->
+    <string name="search_networks_hint">חיפוש רשת לפי שם (SSID)…</string>
+    <string name="clear_search">נקה חיפוש</string>
+    <string name="filter_all">הכל</string>
+    <string name="filter_saved">שמורות</string>
+    <string name="filter_5ghz">5 GHz</string>
+    <string name="filter_open">פתוחות</string>
+    <string name="available_networks_header">רשתות זמינות (%1$d)</string>
+    <string name="connected_network_header">מחובר כעת</string>
+    <string name="ap_count_badge">%1$d נקודות גישה</string>
+
+    <!-- Location Permission Banner -->
+    <string name="location_banner_title">הרשאת מיקום כבויה</string>
+    <string name="location_banner_subtitle">סריקת Root פעילה, אך מתן הרשאת מיקום משפר את תגובת הסריקה של אנדרואיד.</string>
+    <string name="grant_permission">אפשר</string>
+
+    <!-- Connection Details -->
+    <string name="connection_details_title">פרטי החיבור הנוכחי</string>
+    <string name="detail_ssid">שם הרשת (SSID)</string>
+    <string name="detail_bssid">כתובת MAC (BSSID)</string>
+    <string name="detail_security">סוג אבטחה</string>
+    <string name="detail_link_speed">מהירות חיבור</string>
+    <string name="detail_signal_strength">עוצמת אות</string>
+    <string name="detail_frequency_band">תדר / ערוץ</string>
+    <string name="detail_ip_address">כתובת IP במכשיר</string>
+    <string name="detail_gateway">שער ברירת מחדל (Gateway)</string>
+    <string name="detail_dns">שרתי DNS</string>
+    <string name="copy_ip">העתק IP</string>
+    <string name="ip_copied">כתובת ה-IP הועתקה ללוח</string>
+
+    <!-- Signal Quality -->
+    <string name="signal_excellent">מצוינת</string>
+    <string name="signal_very_good">טובה מאוד</string>
+    <string name="signal_good">טובה</string>
+    <string name="signal_fair">בינונית</string>
+    <string name="signal_weak">חלשה</string>
+
+    <!-- Bands & Security Labels -->
+    <string name="band_2_4_ghz">2.4 GHz</string>
+    <string name="band_5_ghz">5 GHz</string>
+    <string name="band_6_ghz">6 GHz</string>
+    <string name="band_unknown">לא ידוע</string>
+    <string name="channel_format">ערוץ %1$d</string>
+    <string name="security_wpa3">WPA3 Personal (SAE)</string>
+    <string name="security_wpa2">WPA2 Personal (PSK)</string>
+    <string name="security_wep">WEP</string>
+    <string name="security_enterprise">ארגונית (Enterprise)</string>
+    <string name="security_owe">הצפנה פתוחה (OWE)</string>
+    <string name="security_open">פתוחה (Open)</string>
+
+    <!-- Saved Networks Sheet -->
+    <string name="saved_networks_title">רשתות שמורות</string>
+    <string name="saved_networks_empty">אין רשתות שמורות במכשיר</string>
+    <string name="saved_network_id">מזהה רשת: %1$d</string>
+</resources>
