@@ -1,31 +1,92 @@
-name: Build Debug APK
+name: Build Android APK
 
 on:
   workflow_dispatch:
+    inputs:
+      build_type:
+        description: "Build variant to generate (debug or release)"
+        required: true
+        default: "debug"
+        type: choice
+        options:
+          - debug
+          - release
 
 jobs:
-  build:
+  build-apk:
+    name: Build ${{ inputs.build_type || 'debug' }} APK
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: .
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'gradle'
+          distribution: temurin
+          java-version: "21"
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Set up Android SDK & accept licenses
+        uses: android-actions/setup-android@v3
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug
+      - name: Set up Gradle 9.3.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "9.3.1"
 
-      - name: Upload APK artifact
+      - name: Prepare debug keystore and environment file
+        run: |
+          if [ ! -f debug.keystore ] && [ -f debug.keystore.base64 ]; then
+            base64 -d debug.keystore.base64 > debug.keystore
+          fi
+          if [ ! -f .env ] && [ -f .env.example ]; then
+            cp .env.example .env
+          fi
+
+      - name: Prepare release keystore (release builds only)
+        if: ${{ inputs.build_type == 'release' }}
+        env:
+          KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > my-upload-key.jks
+          else
+            echo "Warning: RELEASE_KEYSTORE_BASE64 secret is not set. Ensure my-upload-key.jks or KEYSTORE_PATH is configured."
+          fi
+
+      - name: Build APK with Gradle
+        env:
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          BUILD_TYPE="${{ inputs.build_type || 'debug' }}"
+          if [ "$BUILD_TYPE" = "release" ]; then
+            TASK=":app:assembleRelease"
+          else
+            TASK=":app:assembleDebug"
+          fi
+
+          if [ -f ./gradlew ]; then
+            chmod +x ./gradlew
+            ./gradlew "$TASK" --no-daemon --stacktrace
+          else
+            gradle "$TASK" --no-daemon --stacktrace
+          fi
+
+      - name: Verify APK output exists
+        run: |
+          BUILD_TYPE="${{ inputs.build_type || 'debug' }}"
+          ls -lh "app/build/outputs/apk/${BUILD_TYPE}/"
+
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug-apk
-          path: app/build/outputs/apk/debug/*.apk
+          name: root-wifi-${{ inputs.build_type || 'debug' }}-apk
+          path: app/build/outputs/apk/${{ inputs.build_type || 'debug' }}/*.apk
+          if-no-files-found: error
+          retention-days: 30
